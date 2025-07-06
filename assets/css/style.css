@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+table{
+    th , td{
+        border: 2px solid black;
+        padding: 8px 16px;
+
+    }
+    tbody{
+        tr.completed{
+            background-color: green;
+        }
+        tr{
+            background-color: red;
+        }
+    }
+    button {
+        margin: 8px;
+    }
+}
