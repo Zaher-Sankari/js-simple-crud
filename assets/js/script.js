@@ -3,7 +3,7 @@ const from = document.querySelector("#taskForm")
 const taskTitle = document.querySelector("#taskForm #taskTitle")
 console.log(container)
 
-let tasks = [{
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [{
     count:1,
     id: 1,
     title: "frontend Task",
@@ -18,6 +18,9 @@ let tasks = [{
 ]
 let lastId = tasks[tasks.length-1].id
 console.log(lastId);
+const saveTasks = () => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+};
 
 //Read Function
 const read = () =>{
@@ -32,13 +35,13 @@ const read = () =>{
                 <td><button onclick="editStatus(${task.id})">edit status</button><button onclick="editTitle('${task.id}')">edit title</button><button onclick="deleteTask(${task.id})">delete</button></td>
             </tr>`
     })
+    saveTasks()
 }
-
 
 //Write Function
 const add = (e) => {
     e.preventDefault();
-    if(taskTitle.value != ""){
+    if(taskTitle.value !== ""){
         let task = {
             count:tasks.length +1,
             id:lastId+1,
@@ -53,6 +56,7 @@ const add = (e) => {
     else{
         alert("Please Insert a Valid title")
     }
+    saveTasks()
     read()
 }
 
@@ -67,6 +71,7 @@ const editStatus = (id) =>{
         }
         return task
     })
+    saveTasks()
     read()
 }
 
@@ -75,16 +80,23 @@ const editTitle = (id) =>{
     tasks = tasks.map((task) =>{
         if(task.id == id){
             let update = prompt("Enter New Title:")
-            task.title = update
+            if(update === "" || !update){
+                update = task.title
+            }
+            else{
+                task.title = update
+            }
         }
         return task
     })
+    saveTasks()
     read()
 }
 
 //Delete Task:
 const deleteTask = (id) =>{
     tasks = tasks.filter((task) => task.id !== id)
+    saveTasks()
     read()
 }
 
