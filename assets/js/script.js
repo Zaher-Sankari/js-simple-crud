@@ -4,7 +4,7 @@ const taskTitle = document.querySelector("#taskForm #taskTitle")
 console.log(container)
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || []
-let lastId = tasks[tasks.length-1].id
+let lastId = tasks.length > 0 ? tasks[tasks.length - 1].id : 0;
 console.log(lastId);
 const saveTasks = () => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
