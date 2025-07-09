@@ -3,19 +3,7 @@ const from = document.querySelector("#taskForm")
 const taskTitle = document.querySelector("#taskForm #taskTitle")
 console.log(container)
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [{
-    count:1,
-    id: 1,
-    title: "frontend Task",
-    status:true
-},
-{
-    count:2,
-    id: 2,
-    title: "backend Task",
-    status:false
-    }
-]
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []
 let lastId = tasks[tasks.length-1].id
 console.log(lastId);
 const saveTasks = () => {
